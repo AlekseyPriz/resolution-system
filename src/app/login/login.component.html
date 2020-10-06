@@ -1,0 +1,14 @@
+<mat-card>
+  <form class="example-form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <mat-form-field class="example-full-width">
+      <mat-label>Логин</mat-label>
+      <input matInput placeholder="Логин" name="username" ngModel>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Пароль</mat-label>
+      <input type="password" matInput name="password" ngModel>
+    </mat-form-field>
+    <button mat-raised-button color="primary">Войти</button>
+  </form>
+</mat-card>
