@@ -1,7 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { ResolutionComponent } from './resolution/resolution.component';
+import {AuthGuard} from './login/auth.guard';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: 'login', component: LoginComponent},
+  {path: 'resolution', canActivate: [AuthGuard], component: ResolutionComponent},
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
