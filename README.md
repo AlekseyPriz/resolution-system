@@ -1,27 +1,69 @@
-# ResolutionSystem
+###### FE. Тестовое задание
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.3.
+###### Бизнес требование
 
-## Development server
+Я, как пользователь ivanov могу зайти на главную страницу Системы,
+и введя в окне авторизации ivanov для логина и ivanov для пароля,
+перейти к странице просмотра моего документа.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Документ представлен из блоков заголовка, блока содержимого
+(любой текст из пары абзацев) и кнопки &quot;Утвердить&quot; и &quot;Отклонить&quot;.
+Также доступно поле выбора значений резолюции - &quot;Полностью
+согласен&quot;, &quot;Согласен&quot;, &quot;Не согласен&quot;, &quot;Разрешаю красить в синий
+цвет&quot;.
 
-## Code scaffolding
+Также доступно для ввода не обязательное поле комментария.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Я могу нажав на кнопку выполнить действие утверждения, и увидеть
+на экране вместо документа (без перезагрузки всего контента
+страницы) результаты утверждения документа.
 
-## Build
+###### Техническое задание
+Требуется реализовать web-систему с использованием Angular v.8
+(или 9)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Система предусматривает следующие компоненты:
 
-## Running unit tests
+ компонент авторизации (например соответствующий guard) для
+авторизации пользователя
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+ компонент просмотра и утверждения документа
 
-## Running end-to-end tests
+ сервис документа для обращения к backend для выполнения
+операции получения документа и утверждения
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+ сервис авторизации
 
-## Further help
+В сервисе документа предусматривается mock операция получения
+документа.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Входные параметры - ID документа, выходные - структура документа
+в объекте JSON из параметров - название и содержимое.
+В сервисе документа предусматривается mock-реализация операции
+утверждения документа, которая принимает следующую структуру
+входящих параметров:
+{
+&quot;approver&quot;: &quot;ivanov&quot;, //username утверждающего
+&quot;resolution&quot;: &quot;approved&quot;, // резолюция утверждения
+&quot;comment&quot;: &quot;все классно&quot;, // комментарий
+&quot;state&quot;: 1 // статус действия 1-утвердить, 0-отклонить
+}
+
+Сервис frontend обрабатывает ошибки и регистрируют их в консоли.
+Кроме того в случае успеха возвращается текст &quot;Документ успешно
+утвержден&quot; в составе простейшего JSON объекта.. Данный текст
+выводится пользователю.
+Сервис авторизации реализуется произвольно, по желанию
+соискателя. Главное назначение вернуть в guard информацию о
+разрешении или запрете доступа пользователя к документу.
+
+Во всех операциях сервисов frontend реализуется условный опрос
+сервиса в backend (фактический запрос как и backend не
+реализуется) который возвращает code 200 со структурой ответа,
+иначе любой иной код ошибки.
+
+Верстка выполняется в соответствии с предпочтениями
+разработчика.
+Допустимо оставить шаблонные элементы типового проекта angular
+CSS блок не должен быть пустым и наполняется в соответствии с
+предпочтениями разработчика.
